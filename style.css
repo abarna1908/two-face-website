@@ -1,0 +1,39 @@
+#box1{
+    background-image: url("imges/des.png");
+    
+}
+#box2{
+    background-image: url("imges/dev.png");    
+    background-position: 100% 0px;
+}
+*{    
+    padding: 0;
+    margin: 0;
+}
+.portfolio-home, .webDev-text{
+    padding: 0;
+}
+.portfolio-home{
+    position: absolute;
+    left: 25%;
+}
+
+.desc-text{
+    padding: 20px;
+    position: absolute;
+    top: 40%;
+    z-index: 3;
+}
+#webDes{
+    left: 50px;
+}
+#webDev{
+    right: 50px;
+}
+
+.box{
+    height: 600px;
+    width: 200px;
+    float: left;
+    background-size: cover;
+}
