@@ -1,39 +1,34 @@
-#box1{
-    background-image: url("imges/des.png");
-    
+*{
+    margin: 0;
+    padding: 0;
 }
-#box2{
-    background-image: url("imges/dev.png");    
+.face{
+    height: 600px;
+    width: 50%;
+    float: left;
+    background-size: cover;
+}
+#face2{
+    background-image: url(dev.png);
     background-position: 100% 0px;
 }
-*{    
-    padding: 0;
-    margin: 0;
+#face1{
+    background-image: url(des.png);
 }
-.portfolio-home, .webDev-text{
+.faces{
     padding: 0;
-}
-.portfolio-home{
     position: absolute;
     left: 25%;
 }
-
-.desc-text{
-    padding: 20px;
+.text{
     position: absolute;
+    padding: 20px;
     top: 40%;
-    z-index: 3;
+    z-index:3
 }
-#webDes{
-    left: 50px;
+#text1{
+    left:50px;
 }
-#webDev{
+#text2{
     right: 50px;
-}
-
-.box{
-    height: 600px;
-    width: 200px;
-    float: left;
-    background-size: cover;
 }
