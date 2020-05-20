@@ -4,13 +4,13 @@ var screenWidth = screen.width - 100;
 
 var face1 = document.getElementById("face1");
 var face2 = document.getElementById("face2");
-var portfolioFace = document.getElementById("faces")
+var faces = document.getElementById("faces");
 face2.style.width = screenWidth / 4 + "px";
 face1.style.width = screenWidth / 4 + "px";
 
 var maxWidth = screenWidth/2;
 
-var oldX = 0;
+var prevX = 0;
 function changeFace(e) {
     var xDirection = getMouseDirection(e);
     var face1Width = face1.offsetWidth;
@@ -28,10 +28,10 @@ function moveLeft(face1Width, face2Width) {
         face1.style.width = face1Width-10+"px";
 
         //Move image Left
-        var picPos = portfolioFace.offsetLeft;
+        var picPos = faces.offsetLeft;
         maxLeft= 150;
      
-        portfolioFace.style.left = picPos>maxLeft? picPos-4+"px" : picPos
+        faces.style.left = picPos>maxLeft? picPos-4+"px" : picPos
 
         //Change opacity
         percentage = getPercentage(face1Width,screenWidth/4);
@@ -48,10 +48,10 @@ function moveRight(face1Width, face2Width) {
     }
 
     //Move Image Right
-    var picPos = portfolioFace.offsetLeft;
+    var picPos = faces.offsetLeft;
     maxRight = screenWidth/2-150;
    
-    portfolioFace.style.left = picPos<maxRight? picPos+4+"px" : picPos
+    faces.style.left = picPos<maxRight? picPos+4+"px" : picPos
 
     //change opacity
     percentage = getPercentage(face2Width,screenWidth/4);
@@ -61,14 +61,15 @@ function moveRight(face1Width, face2Width) {
     document.getElementById("text1").style.opacity = percentage>0.2?percentage:0;
 }
 function getMouseDirection(e) {
-    if (oldX < e.pageX) {
+    newX = e.pageX;
+    if (prevX < newX) {
         xDirection = "right";
     }
     else {
         xDirection = "left";
     }
 
-    oldX = e.pageX;
+    prevX = newX;
     return xDirection;
 }
 function getPercentage(width, total){
