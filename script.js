@@ -1,79 +1,76 @@
-
 var bodyElement = document.querySelector("body");
 bodyElement.addEventListener("mousemove", changeFace, false);
-
-//set Image dimensions
-
 var screenWidth = screen.width - 100;
-document.getElementById("box2").style.width = screenWidth / 4 + "px";
-document.getElementById("box1").style.width = screenWidth / 4 + "px";
 
+var face1 = document.getElementById("face1");
+var face2 = document.getElementById("face2");
+var portfolioFace = document.getElementById("faces")
+face2.style.width = screenWidth / 4 + "px";
+face1.style.width = screenWidth / 4 + "px";
 
-var xDirection = "";
-var maxWidth = screenWidth / 2;
+var maxWidth = screenWidth/2;
+
 var oldX = 0;
 function changeFace(e) {
-    xDirection = getMouseDirection(e);
-
-    var box1Width = document.getElementById("box1").offsetWidth;
-    var box2Width = document.getElementById("box2").offsetWidth;
+    var xDirection = getMouseDirection(e);
+    var face1Width = face1.offsetWidth;
+    var face2Width = face2.offsetWidth;
     if (xDirection == "left") {
-        moveLeft(box1Width, box2Width);
+        moveLeft(face1Width, face2Width);
     }
     else {
-        moveRight(box1Width, box2Width);
+        moveRight(face1Width, face2Width);
     }
 }
-function moveLeft(box1Width, box2Width) {
-    var box1 = document.getElementById("box1");
-    var box2 = document.getElementById("box2")
-    if (box2Width < maxWidth) {
-        box2.style.width = box2Width + 10 + "px";
-        box1.style.width = box1Width - 10 + "px";
+function moveLeft(face1Width, face2Width) {
+    if(face2Width<maxWidth){
+        face2.style.width = face2Width+10+"px";
+        face1.style.width = face1Width-10+"px";
 
-        //Reduce opacity
-        percentage = getPercentage(box1Width, screenWidth / 4);
-        document.getElementById("webDes").style.opacity = percentage>0.2? percentage: 0;
-        //Increase opcity
-        percentage = getPercentage(box2Width, screenWidth / 2);
-        document.getElementById("webDev").style.opacity = percentage>0.2? percentage: 0;
+        //Move image Left
+        var picPos = portfolioFace.offsetLeft;
+        maxLeft= 150;
+     
+        portfolioFace.style.left = picPos>maxLeft? picPos-4+"px" : picPos
 
-        //Move picture Left
-        picPosition = document.getElementById("portfolio-home").offsetLeft;
-        console.log(picPosition)
-        maxLeft = 150;
-        document.getElementById("portfolio-home").style.left = picPosition>maxLeft? picPosition-4 +"px" : picPosition+"px";
+        //Change opacity
+        percentage = getPercentage(face1Width,screenWidth/4);
+        document.getElementById("text1").style.opacity = percentage>0.2?percentage:0;
 
-    }
-
-}
-function moveRight(box1Width, box2Width) {
-    if (box1Width < maxWidth) {
-        document.getElementById("box2").style.width = box2Width - 10 + "px";
-        document.getElementById("box1").style.width = box1Width + 10 + "px";
-        percentage = getPercentage(box2Width, screenWidth / 4);
-        document.getElementById("webDev").style.opacity = percentage>0.2? percentage: 0;
-        percentage = getPercentage(box1Width, screenWidth / 2);
-        document.getElementById("webDes").style.opacity = percentage>0.2? percentage: 0;
-
-        //Move Pic Right
-        picPosition = document.getElementById("portfolio-home").offsetLeft;
-        maxRight = screenWidth - 150;
-        document.getElementById("portfolio-home").style.left = picPosition<maxRight? picPosition+4 +"px" : picPosition+"px";
+        percentage = getPercentage(face2Width,screenWidth/4);
+        document.getElementById("text2").style.opacity = percentage>0.2?percentage:0;
     }
 }
-function getPercentage(width, total) {
-    return ((width * 100) / total) / 100;    
+function moveRight(face1Width, face2Width) {
+    if(face1Width<maxWidth){
+        face1.style.width = face1Width+10+"px";
+        face2.style.width = face2Width-10+"px";
+    }
+
+    //Move Image Right
+    var picPos = portfolioFace.offsetLeft;
+    maxRight = screenWidth/2-150;
+   
+    portfolioFace.style.left = picPos<maxRight? picPos+4+"px" : picPos
+
+    //change opacity
+    percentage = getPercentage(face2Width,screenWidth/4);
+    document.getElementById("text2").style.opacity = percentage>0.2?percentage:0;
+
+    percentage = getPercentage(face1Width,screenWidth/4);
+    document.getElementById("text1").style.opacity = percentage>0.2?percentage:0;
 }
 function getMouseDirection(e) {
-    //deal with the horizontal case
     if (oldX < e.pageX) {
         xDirection = "right";
-    } else {
+    }
+    else {
         xDirection = "left";
     }
 
     oldX = e.pageX;
-
     return xDirection;
+}
+function getPercentage(width, total){
+    return((width*100)/total)/100;
 }
